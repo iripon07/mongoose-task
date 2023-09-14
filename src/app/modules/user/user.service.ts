@@ -1,21 +1,13 @@
+import { IBook } from "./user.interface";
 import Book from "./user.model";
 
-export const createBookToDB = async () => {
-  const book = await new Book({
-    title: "Book 1",
-    author: ["Author 1", "Author 2"],
-    genre: "Mystery",
-    publicationYear: 2020,
-    publisher: { name: "Publisher A", location: "City A" },
-    reviews: [
-      { user: "User 1", comment: "Great book!" },
-      { user: "User 2", comment: "Interesting plot" },
-    ],
-    rating: 4.5,
-    price: "90",
-  });
-  console.log(book);
+export const createBookToDB = async (payload: IBook): Promise<IBook> => {
+  const book = await new Book(payload);
   await book.save();
   return book;
-  
+};
+
+export const getBooksToDB = async () => {
+  const books = await Book.find();
+  return books;
 };
