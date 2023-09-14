@@ -1,12 +1,15 @@
 import { Schema, model } from "mongoose";
-import { IBook } from "./user.interface";
+import { IBook } from "./book.interface";
 
 const bookSchema = new Schema<IBook>({
   title: {
     type: String,
     required: true,
   },
-  author: [String],
+  author: {
+    type: [String],
+    required: true,
+  },
   genre: {
     type: String,
     required: true,
@@ -14,6 +17,16 @@ const bookSchema = new Schema<IBook>({
   publicationYear: {
     type: Number,
     required: true,
+  },
+  publisher: {
+    name: {
+      type: String,
+      required: true,
+    },
+    location: {
+      type: String,
+      required: true,
+    },
   },
   reviews: [
     {
@@ -34,6 +47,9 @@ const bookSchema = new Schema<IBook>({
   price: {
     type: String,
     required: true,
+  },
+  featured: {
+    type: String,
   },
 });
 
